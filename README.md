@@ -1,4 +1,4 @@
-# readme::author
+# servicehub-apartment://readme
 
 ## instruction
 1. download and install Virtualbox 5.2+.
@@ -18,4 +18,4 @@
 + fred belotte.
 
 ## license
-__author__ is licensed under the terms of the [MIT License](https://github.com/fredbelotte/author/blob/master/LICENSE).
+__servicehub-apartment__ is licensed under the terms of the [MIT License](https://github.com/revaturecloud/servicehub-apartment/blob/master/LICENSE).
