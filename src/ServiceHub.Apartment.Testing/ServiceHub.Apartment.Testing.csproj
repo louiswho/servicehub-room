@@ -13,4 +13,10 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceHub.Apartment.Context\ServiceHub.Apartment.Context.csproj" />
+    <ProjectReference Include="..\ServiceHub.Apartment.Library\ServiceHub.Apartment.Library.csproj" />
+    <ProjectReference Include="..\ServiceHub.Apartment.Service\ServiceHub.Apartment.Service.csproj" />
+  </ItemGroup>
+
 </Project>
