@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceHub.Apartment.Service.Controllers
 {
-  [Route("api/[conroller]")]
+  [Route("api/[controller]")]
   public class ApartmentController : Controller
   {
     public async Task<IActionResult> Get()
