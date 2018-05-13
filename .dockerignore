@@ -16,5 +16,6 @@ CONTRIBUTING*
 docker*
 LICENSE*
 README*
+src/**/appsettings.*.json
 ubuntu*
 vagrant*

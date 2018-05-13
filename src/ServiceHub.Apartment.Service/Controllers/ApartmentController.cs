@@ -1,11 +1,14 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace ServiceHub.Apartment.Service.Controllers
 {
   [Route("api/[controller]")]
-  public class ApartmentController : Controller
+  public class ApartmentController : BaseController
   {
+    public ApartmentController(ILoggerFactory loggerFactory) : base(loggerFactory) {}
+    
     public async Task<IActionResult> Get()
     {
       return await Task.Run(() => Ok());
