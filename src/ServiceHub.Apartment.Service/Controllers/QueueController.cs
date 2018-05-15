@@ -10,10 +10,16 @@ namespace ServiceHub.Apartment.Service.Controllers
 {
   public class QueueController : BaseController
   {
-    private static readonly IQueueClient _queueClient = new QueueClient(_connectionString, _queueName);
-    private static readonly string _connectionString = Environment.GetEnvironmentVariable("SERVICE_BUS_CONNECTION_STRING");
-    private static readonly string _queueName = Environment.GetEnvironmentVariable("SERVICE_BUS_QUEUE_NAME");
+    private static readonly string _connectionString;
+    private static readonly IQueueClient _queueClient;
+    private static readonly string _queueName;
 
+    static QueueController()
+    {
+      _connectionString = Environment.GetEnvironmentVariable("SERVICE_BUS_CONNECTION_STRING");
+      _queueClient = new QueueClient(_connectionString, _queueName);
+      _queueName = Environment.GetEnvironmentVariable("SERVICE_BUS_QUEUE_NAME");
+    }
 
     public void UseMessagingQueue()
     {
