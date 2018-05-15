@@ -6,9 +6,7 @@ namespace ServiceHub.Apartment.Service.Controllers
 {
   [Route("api/[controller]")]
   public class ApartmentController : BaseController
-  {
-    public ApartmentController(ILoggerFactory loggerFactory) : base(loggerFactory) {}
-    
+  { 
     public async Task<IActionResult> Get()
     {
       return await Task.Run(() => Ok());
