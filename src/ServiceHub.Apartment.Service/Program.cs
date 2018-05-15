@@ -13,12 +13,17 @@ namespace ServiceHub.Apartment.Service
 {
   public static class Program
   {
+    private static QueueController _queueController;
+
+    static Program()
+    {
+      _queueController = new QueueController();
+    }
+
     public static void Main(string[] args)
     {
-      var queueController = new QueueController();
-
       BuildWebHost(args).Run();
-      queueController.UseMessagingQueue();
+      _queueController.UseMessagingQueue();
     }
 
     public static IWebHost BuildWebHost(string[] args) =>
