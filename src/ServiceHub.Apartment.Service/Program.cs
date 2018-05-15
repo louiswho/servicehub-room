@@ -13,7 +13,7 @@ namespace ServiceHub.Apartment.Service
 {
   public static class Program
   {
-    private static QueueController _queueController;
+    private static readonly QueueController _queueController;
 
     static Program()
     {
