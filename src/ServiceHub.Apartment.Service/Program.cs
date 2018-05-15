@@ -13,18 +13,9 @@ namespace ServiceHub.Apartment.Service
 {
   public static class Program
   {
-    private static readonly QueueController _queueController;
-
-    static Program()
-    {
-      _queueController = new QueueController();
-    }
-
     public static void Main(string[] args)
     {
       BuildWebHost(args).Run();
-      _queueController.UseReceiver();
-      _queueController.UseSender();
     }
 
     public static IWebHost BuildWebHost(string[] args) =>
