@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace ServiceHub.Apartment.Service.Controllers
     protected readonly ILogger logger;
     protected readonly IQueueClient queueClient;
     protected abstract void UseReceiver();
-    protected abstract void UseSender();
+    protected abstract void UseSender(Message message);
 
     protected BaseController(ILoggerFactory loggerFactory, IQueueClient queueClientSingleton)
     {
@@ -22,8 +23,15 @@ namespace ServiceHub.Apartment.Service.Controllers
 
     protected virtual async Task ReceiverMessageProcessAsync(Message message, CancellationToken cancellationToken)
     {
-      logger.LogInformation(message.MessageId);
-      await queueClient.CompleteAsync(message.SystemProperties.LockToken);
+      if (null == message || null == cancellationToken || cancellationToken.IsCancellationRequested) {
+        return;
+      }
+
+      if (message.SystemProperties.IsLockTokenSet)
+      {
+        logger.LogInformation($"{message.MessageId}\n{Encoding.UTF8.GetString(message.Body)}");
+        await queueClient.CompleteAsync(message.SystemProperties.LockToken);
+      }
     }
 
     protected virtual async Task SenderMessageProcessAsync(Message message)

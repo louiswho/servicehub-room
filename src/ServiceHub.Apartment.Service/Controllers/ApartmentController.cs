@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
@@ -9,7 +10,8 @@ namespace ServiceHub.Apartment.Service.Controllers
   [Route("api/[controller]")]
   public class ApartmentController : BaseController
   {
-    public ApartmentController(ILoggerFactory loggerFactory, IQueueClient queueClientSingleton) : base(loggerFactory, queueClientSingleton) {}
+    public ApartmentController(ILoggerFactory loggerFactory, IQueueClient queueClientSingleton)
+      : base(loggerFactory, queueClientSingleton) {}
 
     public async Task<IActionResult> Get()
     {
@@ -42,11 +44,16 @@ namespace ServiceHub.Apartment.Service.Controllers
 
     protected override void UseReceiver()
     {
-      queueClient.RegisterMessageHandler(ReceiverMessageProcessAsync, ReceiverExceptionHandler);
+      var messageHandlerOptions = new MessageHandlerOptions(ReceiverExceptionHandler)
+      {
+        AutoComplete = false
+      };
+
+      queueClient.RegisterMessageHandler(ReceiverMessageProcessAsync, messageHandlerOptions);
     }
-    protected override void UseSender()
+    protected override void UseSender(Message message)
     {
-      queueClient.SendAsync(new Message());
+      queueClient.SendAsync(message);
     }
   }
 }
