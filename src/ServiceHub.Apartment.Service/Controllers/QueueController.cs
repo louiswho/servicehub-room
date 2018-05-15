@@ -31,6 +31,11 @@ namespace ServiceHub.Apartment.Service.Controllers
       _queueClient.RegisterMessageHandler(ReceiverMessageHandler, messageHandlerOptions);
     }
 
+    public void UseSender()
+    {
+      throw new NotImplementedException();
+    }
+
     private async Task ReceiverExceptionHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
     {
       logger.LogError(exceptionReceivedEventArgs.Exception.ToString());

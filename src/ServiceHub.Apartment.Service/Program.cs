@@ -24,6 +24,7 @@ namespace ServiceHub.Apartment.Service
     {
       BuildWebHost(args).Run();
       _queueController.UseReceiver();
+      _queueController.UseSender();
     }
 
     public static IWebHost BuildWebHost(string[] args) =>
