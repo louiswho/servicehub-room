@@ -1,8 +1,10 @@
 using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace ServiceHub.Apartment.Service.Controllers
 {
@@ -17,23 +19,26 @@ namespace ServiceHub.Apartment.Service.Controllers
     public static void UseMessagingQueue()
     {
       var queue = new QueueController(new LoggerFactory());
-      var messageHandlerOptions = new MessageHandlerOptions(queue.ExceptionHandler)
+      var messageHandlerOptions = new MessageHandlerOptions(queue.ReceiverExceptionHandler)
       {
         AutoComplete = false,
         MaxConcurrentCalls = 1
       };
 
-      _queueClient.RegisterMessageHandler(queue.MessageHandler, messageHandlerOptions);
+      _queueClient.RegisterMessageHandler(queue.ReceiverMessageHandler, messageHandlerOptions);
     }
 
-    private async Task ExceptionHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
+    private async Task ReceiverExceptionHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
     {
       await Task.Run(() => throw new NotImplementedException());
     }
 
-    private async Task MessageHandler(Message message, CancellationToken cancellationToken)
+    private async Task ReceiverMessageHandler(Message message, CancellationToken cancellationToken)
     {
-      await Task.Run(() => throw new NotImplementedException());
+      logger.LogInformation(message.SystemProperties.SequenceNumber.ToString());
+      JsonConvert.DeserializeObject(Encoding.UTF8.GetString(message.Body));
+
+      await _queueClient.CompleteAsync(message.SystemProperties.LockToken);
     }
   }
 }
