@@ -23,7 +23,7 @@ namespace ServiceHub.Apartment.Service
     public static void Main(string[] args)
     {
       BuildWebHost(args).Run();
-      _queueController.UseMessagingQueue();
+      _queueController.UseReceiver();
     }
 
     public static IWebHost BuildWebHost(string[] args) =>

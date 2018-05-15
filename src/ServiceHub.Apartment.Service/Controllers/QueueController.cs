@@ -20,7 +20,7 @@ namespace ServiceHub.Apartment.Service.Controllers
       _queueClient = new QueueClient(connectionString, queueName);
     }
 
-    public void UseMessagingQueue()
+    public void UseReceiver()
     {
       var messageHandlerOptions = new MessageHandlerOptions(ReceiverExceptionHandler)
       {
