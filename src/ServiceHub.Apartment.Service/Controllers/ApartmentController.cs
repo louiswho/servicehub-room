@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
-using ServiceHub.Apartment.Library.Interfaces;
 
 namespace ServiceHub.Apartment.Service.Controllers
 {

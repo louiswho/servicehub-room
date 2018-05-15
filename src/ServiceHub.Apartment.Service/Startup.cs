@@ -9,8 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ServiceHub.Apartment.Library.Factories;
-using ServiceHub.Apartment.Library.Interfaces;
 
 namespace ServiceHub.Apartment.Service
 {
