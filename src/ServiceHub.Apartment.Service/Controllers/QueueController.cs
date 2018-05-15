@@ -30,7 +30,8 @@ namespace ServiceHub.Apartment.Service.Controllers
 
     private async Task ReceiverExceptionHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
     {
-      await Task.Run(() => throw new NotImplementedException());
+      logger.LogError(exceptionReceivedEventArgs.Exception.ToString());
+      await Task.CompletedTask;
     }
 
     private async Task ReceiverMessageHandler(Message message, CancellationToken cancellationToken)
