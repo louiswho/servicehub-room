@@ -15,8 +15,10 @@ namespace ServiceHub.Apartment.Service
   {
     public static void Main(string[] args)
     {
+      var queueController = new QueueController();
+
       BuildWebHost(args).Run();
-      QueueController.UseMessagingQueue();
+      queueController.UseMessagingQueue();
     }
 
     public static IWebHost BuildWebHost(string[] args) =>

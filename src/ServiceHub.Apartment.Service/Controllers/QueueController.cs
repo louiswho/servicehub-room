@@ -14,18 +14,16 @@ namespace ServiceHub.Apartment.Service.Controllers
     private static readonly string _connectionString = Environment.GetEnvironmentVariable("SERVICE_BUS_CONNECTION_STRING");
     private static readonly string _queueName = Environment.GetEnvironmentVariable("SERVICE_BUS_QUEUE_NAME");
 
-    public QueueController(ILoggerFactory loggerFactory) : base(loggerFactory) {}
 
-    public static void UseMessagingQueue()
+    public void UseMessagingQueue()
     {
-      var queue = new QueueController(new LoggerFactory());
-      var messageHandlerOptions = new MessageHandlerOptions(queue.ReceiverExceptionHandler)
+      var messageHandlerOptions = new MessageHandlerOptions(ReceiverExceptionHandler)
       {
         AutoComplete = false,
         MaxConcurrentCalls = 1
       };
 
-      _queueClient.RegisterMessageHandler(queue.ReceiverMessageHandler, messageHandlerOptions);
+      _queueClient.RegisterMessageHandler(ReceiverMessageHandler, messageHandlerOptions);
     }
 
     private async Task ReceiverExceptionHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
