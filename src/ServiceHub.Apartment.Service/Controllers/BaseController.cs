@@ -21,9 +21,16 @@ namespace ServiceHub.Apartment.Service.Controllers
       queueClient = queueClientSingleton;
     }
 
+    protected virtual async Task ReceiverExceptionHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
+    {
+      logger.LogError(exceptionReceivedEventArgs.Exception.ToString());
+      await Task.CompletedTask;
+    }
+
     protected virtual async Task ReceiverMessageProcessAsync(Message message, CancellationToken cancellationToken)
     {
-      if (null == message || cancellationToken.IsCancellationRequested) {
+      if (null == message || cancellationToken.IsCancellationRequested)
+      {
         return;
       }
 
@@ -38,12 +45,6 @@ namespace ServiceHub.Apartment.Service.Controllers
     {
       logger.LogInformation(message.MessageId);
       await queueClient.SendAsync(message);
-    }
-
-    protected virtual async Task ReceiverExceptionHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
-    {
-      logger.LogError(exceptionReceivedEventArgs.Exception.ToString());
-      await Task.CompletedTask;
     }
   }
 }
