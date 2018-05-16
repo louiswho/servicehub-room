@@ -23,7 +23,7 @@ namespace ServiceHub.Apartment.Service.Controllers
 
     protected virtual async Task ReceiverMessageProcessAsync(Message message, CancellationToken cancellationToken)
     {
-      if (null == message || null == cancellationToken || cancellationToken.IsCancellationRequested) {
+      if (null == message || cancellationToken.IsCancellationRequested) {
         return;
       }
 
