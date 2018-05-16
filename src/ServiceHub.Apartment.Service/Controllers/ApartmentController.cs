@@ -53,7 +53,9 @@ namespace ServiceHub.Apartment.Service.Controllers
     }
     protected override void UseSender(Message message)
     {
-      queueClient.SendAsync(message);
+      Task.Run(() =>
+        SenderMessageProcessAsync(message)
+      );
     }
   }
 }
