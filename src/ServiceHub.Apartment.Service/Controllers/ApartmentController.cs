@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
@@ -51,6 +50,7 @@ namespace ServiceHub.Apartment.Service.Controllers
 
       queueClient.RegisterMessageHandler(ReceiverMessageProcessAsync, messageHandlerOptions);
     }
+
     protected override void UseSender(Message message)
     {
       Task.Run(() =>
