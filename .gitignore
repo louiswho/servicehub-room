@@ -1,5 +1,5 @@
-# servicehub-apartment://gitignore
-# licensed under the terms of the [MIT License](https://github.com/revaturecloud/servicehub-apartment/blob/master/LICENSE).
+# servicehub-room://gitignore
+# licensed under the terms of the [MIT License](https://github.com/revaturecloud/servicehub-room/blob/master/LICENSE).
 
 # PROJECT
 # exclude - filepath
@@ -8,8 +8,9 @@
 
 # exclude - filename
 .history
-appsettings.*.json
 ubuntu*
+
+**/appsettings.*.json
 
 # ==================================================================================================
 # //////////////////////////////////////////////////////////////////////////////////////////////////
