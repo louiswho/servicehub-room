@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ServiceHub.Apartment.Library\ServiceHub.Apartment.Library.csproj" />
+    <ProjectReference Include="..\ServiceHub.Room.Library\ServiceHub.Room.Library.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

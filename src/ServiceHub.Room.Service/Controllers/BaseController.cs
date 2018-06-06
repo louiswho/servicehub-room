@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 
-namespace ServiceHub.Apartment.Service.Controllers
+namespace ServiceHub.Room.Service.Controllers
 {
   public abstract class BaseController : Controller
   {
