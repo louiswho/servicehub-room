@@ -1,4 +1,4 @@
-# servicehub-apartment://changelog
+# servicehub-room://changelog
 
 ## 0.0.0
 
@@ -8,4 +8,4 @@ we bring you the latest features as soon as they are ready.
 for the details of this update, please read the release notes.
 
 ## license
-__servicehub-apartment__ is licensed under the terms of the [MIT License](https://github.com/revaturecloud/servicehub-apartment/blob/master/LICENSE).
+__servicehub-room__ is licensed under the terms of the [MIT License](https://github.com/revaturecloud/servicehub-room/blob/master/LICENSE).

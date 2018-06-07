@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 
-namespace ServiceHub.Apartment.Service.Controllers
+namespace ServiceHub.Room.Service.Controllers
 {
   [Route("api/[controller]")]
-  public class ApartmentController : BaseController
+  public class RoomController : BaseController
   {
-    public ApartmentController(ILoggerFactory loggerFactory, IQueueClient queueClientSingleton)
+    public RoomController(ILoggerFactory loggerFactory, IQueueClient queueClientSingleton)
       : base(loggerFactory, queueClientSingleton) {}
 
     public async Task<IActionResult> Get()

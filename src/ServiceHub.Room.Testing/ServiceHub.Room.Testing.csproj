@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ServiceHub.Apartment.Context\ServiceHub.Apartment.Context.csproj" />
-    <ProjectReference Include="..\ServiceHub.Apartment.Library\ServiceHub.Apartment.Library.csproj" />
-    <ProjectReference Include="..\ServiceHub.Apartment.Service\ServiceHub.Apartment.Service.csproj" />
+    <ProjectReference Include="..\ServiceHub.Room.Context\ServiceHub.Room.Context.csproj" />
+    <ProjectReference Include="..\ServiceHub.Room.Library\ServiceHub.Room.Library.csproj" />
+    <ProjectReference Include="..\ServiceHub.Room.Service\ServiceHub.Room.Service.csproj" />
   </ItemGroup>
 
 </Project>

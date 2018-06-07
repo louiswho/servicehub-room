@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace ServiceHub.Apartment.Service
+namespace ServiceHub.Room.Service
 {
   public class Startup
   {

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Apartment.Context", "ServiceHub.Apartment.Context\ServiceHub.Apartment.Context.csproj", "{98A431DF-3EF5-406A-AFDB-B711F1CA9932}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Room.Context", "ServiceHub.Room.Context\ServiceHub.Room.Context.csproj", "{98A431DF-3EF5-406A-AFDB-B711F1CA9932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Apartment.Library", "ServiceHub.Apartment.Library\ServiceHub.Apartment.Library.csproj", "{66CFEF42-4980-4117-AD37-DE0775FB20CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Room.Library", "ServiceHub.Room.Library\ServiceHub.Room.Library.csproj", "{66CFEF42-4980-4117-AD37-DE0775FB20CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Apartment.Service", "ServiceHub.Apartment.Service\ServiceHub.Apartment.Service.csproj", "{2FC49644-0AD8-412F-B803-1300C196439F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Room.Service", "ServiceHub.Room.Service\ServiceHub.Room.Service.csproj", "{2FC49644-0AD8-412F-B803-1300C196439F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Apartment.Testing", "ServiceHub.Apartment.Testing\ServiceHub.Apartment.Testing.csproj", "{A2949C1A-58E7-4F65-8149-6B03ED4C8BE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Room.Testing", "ServiceHub.Room.Testing\ServiceHub.Room.Testing.csproj", "{A2949C1A-58E7-4F65-8149-6B03ED4C8BE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
