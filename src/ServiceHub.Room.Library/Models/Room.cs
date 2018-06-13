@@ -17,7 +17,7 @@ namespace ServiceHub.Room.Library.Models
         /// Values are upper case for case insensitivity.
         /// </remarks>
         [IgnoreDataMember]
-        private static readonly string[] Genders = { "M", "F", "MALE", "FEMALE", "" };
+        public static readonly string[] Genders = { "M", "F", "" };
 
         ///<summary> Key. Used to uniquely identify this Room model. </summary>
         [DataMember]
