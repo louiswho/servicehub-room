@@ -6,7 +6,6 @@ namespace ServiceHub.Room.Library.Models
 {
     ///<summary> Address Model Referenced by the Room model. </summary>
     ///<remarks>This model is for the library and has validation.</remarks>
-    [DataContract]
     public class Address {
 
         /// <summary>
@@ -39,31 +38,24 @@ namespace ServiceHub.Room.Library.Models
         private static readonly string[] CountryCodes = { "US" };
 
         ///<summary> Key. Used to uniquely identify this Address model. </summary>
-        [DataMember]
         public Guid AddressId { get; set; }
 
         ///<summary> Steet number and street name of this address. </summary>
-        [DataMember]
         public string Address1 { get; set; }
 
         ///<summary> Apt/Room number for this address if applicable. </summary>
-        [DataMember]
         public string Address2 { get; set; }
 
         ///<summary> Name of the city for this address. </summary>
-        [DataMember]
         public string City { get; set; }
 
         ///<summary> Name of the state for this address. </summary>
-        [DataMember]
         public string State { get; set; }
 
         ///<summary> 5 digit number specifing region. </summary>
-        [DataMember]
         public string PostalCode { get; set; }
 
         ///<summary> Name of the country for this address. </summary>
-        [DataMember]
         public string Country { get; set; }
 
         /// <summary>
