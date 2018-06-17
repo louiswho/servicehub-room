@@ -24,7 +24,7 @@ namespace ServiceHub.Room.Context.Repository
         /// Creates a room within the MongoDatabase. If the room is null an ArgumentNullException is thrown.
         /// </summary>
         /// <param name="room"></param>
-        public async Task Insert(Models.Room room)
+        public async Task InsertAsync(Models.Room room)
         {
             if (room == null)
             {
@@ -38,7 +38,7 @@ namespace ServiceHub.Room.Context.Repository
         /// Gets all rooms from the Mongo database.
         /// </summary>
         /// <returns>Returns a list of all the Models.Room within the database. If no rooms are found it returns an ArgumentNullException.</returns>
-        public async Task<List<Models.Room>> Get()
+        public async Task<List<Models.Room>> GetAsync()
         {
             if (_collection == null)
             {
@@ -53,7 +53,7 @@ namespace ServiceHub.Room.Context.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Returns a Models.Room object from the database. Returns an ArgumentNullException is the room exists based on the id.</returns>
-        public async Task<Models.Room> GetById(Guid id)
+        public async Task<Models.Room> GetByIdAsync(Guid id)
         {
             if (id == null)
             {
@@ -69,7 +69,7 @@ namespace ServiceHub.Room.Context.Repository
         /// If no room object corresponds with the passed in room, no room is updated.
         /// </summary>
         /// <param name="room"></param>
-        public async Task Update(Models.Room room)
+        public async Task UpdateAsync(Models.Room room)
         {
             if (room == null)
             {
@@ -91,7 +91,7 @@ namespace ServiceHub.Room.Context.Repository
         /// If the RoomId is not found an ArgumentNullException is thrown.
         /// </summary>
         /// <param name="id"></param>
-        public async Task Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
             if (id == null)
             {

@@ -10,10 +10,10 @@ namespace ServiceHub.Room.Context.Repository
         /// Interface for the CRUD functionality of the Room repository
         /// </summary>
         /// <param name="room"></param>
-        Task Insert(Models.Room room);
-        Task<List<Models.Room>> Get();
-        Task<Models.Room> GetById(Guid id);
-        Task Update(Models.Room room);
-        Task Delete(Guid id);
+        Task InsertAsync(Models.Room room);
+        Task<List<Models.Room>> GetAsync();
+        Task<Models.Room> GetByIdAsync(Guid id);
+        Task UpdateAsync(Models.Room room);
+        Task DeleteAsync(Guid id);
     }
 }

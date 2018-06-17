@@ -21,18 +21,18 @@ namespace ServiceHub.Room.Context.Repository
         /// Creates a Models.Room object in the data source.
         /// </summary>
         /// <param name="room"></param>
-        public async Task Insert(Models.Room room)
+        public async Task InsertAsync(Models.Room room)
         {
-            await _roomRepository.Insert(room);
+            await _roomRepository.InsertAsync(room);
         }
 
         /// <summary>
         /// Gets all Models.Room objects from a data source.
         /// </summary>
         /// <returns>Returns all Models.Room objects from the give data source.</returns>
-        public async Task<List<Models.Room>> Get()
+        public async Task<List<Models.Room>> GetAsync()
         {
-            return await _roomRepository.Get();
+            return await _roomRepository.GetAsync();
         }
 
         /// <summary>
@@ -40,27 +40,27 @@ namespace ServiceHub.Room.Context.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns>>Returns Models.Room objects from the give data source based on the Guid.</returns>
-        public async Task<Models.Room> GetById(Guid id)
+        public async Task<Models.Room> GetByIdAsync(Guid id)
         {
-            return await  _roomRepository.GetById(id);
+            return await  _roomRepository.GetByIdAsync(id);
         }
 
         /// <summary>
         /// Updates a Models.Room object within the data source.
         /// </summary>
         /// <param name="room"></param>
-        public async Task Update(Models.Room room)
+        public async Task UpdateAsync(Models.Room room)
         {
-            await _roomRepository.Update(room);
+            await _roomRepository.UpdateAsync(room);
         }
 
         /// <summary>
         /// Deletes a Models.Room object from the data source based on a Guid.
         /// </summary>
         /// <param name="id"></param>
-        public async Task Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            await _roomRepository.Delete(id);
+            await _roomRepository.DeleteAsync(id);
         }
     }
 }

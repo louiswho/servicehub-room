@@ -29,7 +29,7 @@ namespace ServiceHub.Room.Service.Controllers
             List<Context.Models.Room> ctxRooms;
             try
             {
-                ctxRooms = await _context.Get();
+                ctxRooms = await _context.GetAsync();
             }
             catch
             {
@@ -63,7 +63,7 @@ namespace ServiceHub.Room.Service.Controllers
             Context.Models.Room result;
             try
             {
-                result = await _context.GetById(id);
+                result = await _context.GetByIdAsync(id);
             }
             catch
             {
@@ -112,15 +112,14 @@ namespace ServiceHub.Room.Service.Controllers
 
             try
             {
-                await _context.Insert(room);
+                await _context.InsertAsync(room);
             }
             catch
             {
                 return BadRequest("Cannot insert duplicate record.");
             }
 
-            //todo fix that route
-            return CreatedAtRoute("", value);
+            return CreatedAtRoute("Rooms", new {id = value.RoomId}, value);
         }
 
         /// <summary>
@@ -144,7 +143,7 @@ namespace ServiceHub.Room.Service.Controllers
             Context.Models.Room ctxItem;
             try
             {
-                ctxItem = await _context.GetById(roomMod.RoomId);
+                ctxItem = await _context.GetByIdAsync(roomMod.RoomId);
             }
             catch
             {
@@ -190,7 +189,7 @@ namespace ServiceHub.Room.Service.Controllers
                 {
                     try
                     {
-                        await _context.Update(newCtxItem);
+                        await _context.UpdateAsync(newCtxItem);
                     }
                     catch
                     {
@@ -251,7 +250,7 @@ namespace ServiceHub.Room.Service.Controllers
 
             try
             {
-                var item = await _context.GetById(id);
+                var item = await _context.GetByIdAsync(id);
 
                 if(item == null)
                 {
@@ -265,7 +264,7 @@ namespace ServiceHub.Room.Service.Controllers
 
             try
             {
-                await _context.Delete(id);
+                await _context.DeleteAsync(id);
             }
             catch
             {

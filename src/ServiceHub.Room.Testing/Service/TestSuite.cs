@@ -88,9 +88,9 @@ namespace ServiceHub.Room.Testing.Service
                 Gender = "M"
             };
 
-            await context.Insert(room);
+            await context.InsertAsync(room);
 
-            Assert.Equal(room.RoomId, context.Get().Result.First().RoomId);
+            Assert.Equal(room.RoomId, context.GetAsync().Result.First().RoomId);
         }
         
         [Fact]
@@ -140,9 +140,9 @@ namespace ServiceHub.Room.Testing.Service
                 Gender = "M"
             };
 
-            await context.Insert(room);
-            await context.Insert(room1);
-            results = context.Get().Result;
+            await context.InsertAsync(room);
+            await context.InsertAsync(room1);
+            results = context.GetAsync().Result;
             Assert.Equal(2,results.Count);
         }
 
@@ -170,8 +170,8 @@ namespace ServiceHub.Room.Testing.Service
                 Occupancy = 2,
                 Gender = "M"
             };
-            await context.Insert(room);
-            Room.Context.Models.Room result = context.GetById(room.RoomId).Result;
+            await context.InsertAsync(room);
+            Room.Context.Models.Room result = context.GetByIdAsync(room.RoomId).Result;
 
             Assert.Equal(room.RoomId,result.RoomId);
         }
@@ -200,12 +200,12 @@ namespace ServiceHub.Room.Testing.Service
                 Occupancy = 2,
                 Gender = "M"
             };
-            await context.Insert(room);
+            await context.InsertAsync(room);
 
             room.Location = "Dallas";
-            await context.Update(room);
+            await context.UpdateAsync(room);
 
-            Assert.Equal("Dallas",context.GetById(room.RoomId).Result.Location);
+            Assert.Equal("Dallas",context.GetByIdAsync(room.RoomId).Result.Location);
         }
 
         [Fact]
@@ -232,9 +232,9 @@ namespace ServiceHub.Room.Testing.Service
                 Occupancy = 2,
                 Gender = "M"
             };
-            await context.Insert(room);
+            await context.InsertAsync(room);
             
-            await context.Delete(room.RoomId);
+            await context.DeleteAsync(room.RoomId);
 
             Assert.Empty(context.roomList);
         }
