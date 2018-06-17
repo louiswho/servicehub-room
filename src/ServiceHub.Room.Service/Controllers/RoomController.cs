@@ -29,7 +29,7 @@ namespace ServiceHub.Room.Service.Controllers
             List<Context.Models.Room> ctxRooms;
             try
             {
-                ctxRooms = await Task.Run(() => _context.Get());
+                ctxRooms = await _context.Get();
             }
             catch
             {
@@ -63,11 +63,11 @@ namespace ServiceHub.Room.Service.Controllers
             Context.Models.Room result;
             try
             {
-                result = await Task.Run(() => _context.GetById(id));   
+                result = await _context.GetById(id);
             }
             catch
             {
-                return BadRequest($"Resource does not exist under RoomId: {id}");
+                return NotFound($"Resource does not exist under RoomId: {id}");
             }
 
             var room = ModelMapper.ContextToLibrary(result);
@@ -112,15 +112,15 @@ namespace ServiceHub.Room.Service.Controllers
 
             try
             {
-                var myTask = Task.Run(() => _context.Insert(room));
-                await myTask;
+                await _context.Insert(room);
             }
             catch
             {
                 return BadRequest("Cannot insert duplicate record.");
             }
 
-            return StatusCode(201);
+            //todo fix that route
+            return CreatedAtRoute("", value);
         }
 
         /// <summary>
@@ -131,7 +131,12 @@ namespace ServiceHub.Room.Service.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] Library.Models.Room roomMod)
         {
-            if (roomMod == null || roomMod.RoomId == Guid.Empty)
+            if (roomMod == null)
+            {
+                return BadRequest("Incorrect model.");
+            }
+
+            if (roomMod.RoomId == Guid.Empty)
             {
                 return BadRequest("Identifier required for record editing.");
             }
@@ -139,11 +144,11 @@ namespace ServiceHub.Room.Service.Controllers
             Context.Models.Room ctxItem;
             try
             {
-                ctxItem = await Task.Run(() => _context.GetById(roomMod.RoomId));
+                ctxItem = await _context.GetById(roomMod.RoomId);
             }
             catch
             {
-                return BadRequest($"Resource does not exist under RoomId: {roomMod.RoomId}");
+                return NotFound($"Resource does not exist under RoomId: {roomMod.RoomId}");
             }
             
             var item = ModelMapper.ContextToLibrary(ctxItem);
@@ -185,9 +190,7 @@ namespace ServiceHub.Room.Service.Controllers
                 {
                     try
                     {
-                        var myTask = Task.Run(() => _context.Update(newCtxItem));
-                        await myTask;
-                        return Ok(item);
+                        await _context.Update(newCtxItem);
                     }
                     catch
                     {
@@ -203,6 +206,8 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 return BadRequest("Edit would make the record invalid.");
             }
+
+            return NoContent();
         }
 
         /// <summary>
@@ -215,14 +220,19 @@ namespace ServiceHub.Room.Service.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] Library.Models.Room roomMod)
         {
-            if (id == Guid.Empty || roomMod == null)
+            if (id == Guid.Empty)
             {
                 return BadRequest("Identifier required for record editing.");
             }
 
+            if (roomMod == null)
+            {
+                return BadRequest("Incorrect model.");
+            }
+
             roomMod.RoomId = id;
             
-            return await Task.Run(() => Put(roomMod));
+            return await Put(roomMod);
         }
 
         /// <summary>
@@ -241,30 +251,28 @@ namespace ServiceHub.Room.Service.Controllers
 
             try
             {
-                var item = await Task.Run(() => _context.GetById(id));
+                var item = await _context.GetById(id);
 
                 if(item == null)
                 {
-                    return BadRequest("Item not in Database");
+                    return NotFound("Item not in Database");
                 }
             }
             catch
             {
-                return BadRequest("Item not in Database");
+                return NotFound("Item not in Database");
             }
 
             try
             {
-                var myTask = Task.Run(() => _context.Delete(id));
-                await myTask;
+                await _context.Delete(id);
             }
             catch
             {
                 return StatusCode(500);
             }
 
-            return StatusCode(200);
+            return NoContent();
         }
     }
-
 }

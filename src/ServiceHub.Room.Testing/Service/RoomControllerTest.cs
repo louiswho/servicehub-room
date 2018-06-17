@@ -48,7 +48,7 @@ namespace ServiceHub.Room.Testing.Service
             //Arrange
             room.Address = address;
             Guid id = room.RoomId;
-            context.Insert(ModelMapper.LibraryToContext(room));
+            await context.Insert(ModelMapper.LibraryToContext(room));
             RoomController roomController = new RoomController(new LoggerFactory(), context);
 
             //Act
@@ -70,7 +70,7 @@ namespace ServiceHub.Room.Testing.Service
             //Arrange
             room.Address = address;
             Guid id = room.RoomId;
-            context.Insert(ModelMapper.LibraryToContext(room));
+            await context.Insert(ModelMapper.LibraryToContext(room));
             RoomController roomController = new RoomController(new LoggerFactory(), context);
 
             var myTask = Task.Run(() => roomController.Get(id));
@@ -88,7 +88,7 @@ namespace ServiceHub.Room.Testing.Service
             //Arrange
             room.Address = address;
             Guid id = room.RoomId;
-            context.Insert(ModelMapper.LibraryToContext(room));
+            await context.Insert(ModelMapper.LibraryToContext(room));
             RoomController roomController = new RoomController(new LoggerFactory(), context);
 
             var myTask = Task.Run(() => roomController.Get(Guid.Empty));
@@ -113,7 +113,7 @@ namespace ServiceHub.Room.Testing.Service
             var myTask = Task.Run(() => roomController.Post(room));
             var result = await myTask;
 
-            var contentResult = result as StatusCodeResult;
+            var contentResult = result as CreatedAtRouteResult;
             Assert.NotNull(contentResult);
             int code = (int)contentResult.StatusCode;
             Assert.InRange(code,200,300);
@@ -144,18 +144,18 @@ namespace ServiceHub.Room.Testing.Service
             //Arrange
             RoomController roomController = new RoomController(new LoggerFactory(), context);
             room.Address = address;
-            context.Insert(ModelMapper.LibraryToContext(room));
+            await context.Insert(ModelMapper.LibraryToContext(room));
             room.Location = "Dallas";
 
             var myTask = Task.Run(() => roomController.Put(room));
             var result = await myTask;
 
             //var contentResult = result as StatusCodeResult;
-            var contentResult = result as OkObjectResult;
+            var contentResult = result as NoContentResult;
             Assert.NotNull(contentResult);
             int code = (int)contentResult.StatusCode;
             Assert.InRange(code, 200, 299);
-            Room.Context.Models.Room room1 = context.GetById(room.RoomId);
+            Room.Context.Models.Room room1 = context.GetById(room.RoomId).Result;
             Assert.Equal("Dallas", room1.Location);
         }
 
@@ -165,17 +165,17 @@ namespace ServiceHub.Room.Testing.Service
             //Arrange
             RoomController roomController = new RoomController(new LoggerFactory(), context);
             room.Address = address;
-            context.Insert(ModelMapper.LibraryToContext(room));
+            await context.Insert(ModelMapper.LibraryToContext(room));
             room.Location = "Dallas";
 
             var myTask = Task.Run(() => roomController.Put(room.RoomId,room));
             var result = await myTask;
             
-            var contentResult = result as OkObjectResult;
+            var contentResult = result as NoContentResult;
             Assert.NotNull(contentResult);
             int code = (int)contentResult.StatusCode;
             Assert.InRange(code, 200, 299);
-            Room.Context.Models.Room room1 = context.GetById(room.RoomId);
+            Room.Context.Models.Room room1 = context.GetById(room.RoomId).Result;
             Assert.Equal("Dallas", room1.Location);
         }
 
@@ -204,7 +204,7 @@ namespace ServiceHub.Room.Testing.Service
             //Arrange
             RoomController roomController = new RoomController(new LoggerFactory(), context);
             room.Address = address;
-            context.Insert(ModelMapper.LibraryToContext(room));
+            await context.Insert(ModelMapper.LibraryToContext(room));
             
             Assert.NotEmpty(context.roomList);
             var myTask = Task.Run(() => roomController.Delete(room.RoomId));
@@ -222,7 +222,7 @@ namespace ServiceHub.Room.Testing.Service
             //Arrange
             RoomController roomController = new RoomController(new LoggerFactory(), context);
             room.Address = address;
-            context.Insert(ModelMapper.LibraryToContext(room));
+            await context.Insert(ModelMapper.LibraryToContext(room));
 
             Assert.NotEmpty(context.roomList);
             var badId = Guid.Empty;
@@ -241,14 +241,14 @@ namespace ServiceHub.Room.Testing.Service
             //Arrange
             RoomController roomController = new RoomController(new LoggerFactory(), context);
             room.Address = address;
-            context.Insert(ModelMapper.LibraryToContext(room));
+            await context.Insert(ModelMapper.LibraryToContext(room));
 
             Assert.NotEmpty(context.roomList);
             var badId = Guid.NewGuid();
             var myTask = Task.Run(() => roomController.Delete(badId));
             var result = await myTask;
 
-            var contentResult = result as BadRequestObjectResult;
+            var contentResult = result as NotFoundObjectResult;
             Assert.NotNull(contentResult);
             int code = (int)contentResult.StatusCode;
             //Invalid input is a client side fault which should yeild a 4xx status code

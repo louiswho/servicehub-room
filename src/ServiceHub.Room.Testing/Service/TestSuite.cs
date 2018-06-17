@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MongoDB.Bson;
 using Xunit;
 using ServiceHub.Room.Context.Repository;
@@ -12,6 +13,7 @@ namespace ServiceHub.Room.Testing.Service
         private RoomRepositoryMemory context;
         private Address address;
         private Room.Context.Models.Room room;
+
         public TestSuite()
         {
             address = address = new Address
@@ -62,7 +64,7 @@ namespace ServiceHub.Room.Testing.Service
         }
 
         [Fact]
-        public void TestContextInsert()
+        public async void TestContextInsert()
         {
             context = new RoomRepositoryMemory();
             Address address = new Address
@@ -86,13 +88,13 @@ namespace ServiceHub.Room.Testing.Service
                 Gender = "M"
             };
 
-            context.Insert(room);
+            await context.Insert(room);
 
-            Assert.Equal(room.RoomId, context.Get()[0].RoomId);
+            Assert.Equal(room.RoomId, context.Get().Result.First().RoomId);
         }
         
         [Fact]
-        public void TestGetAll()
+        public async void TestGetAll()
         {
             context = new RoomRepositoryMemory();
             List<Room.Context.Models.Room> results;
@@ -138,14 +140,14 @@ namespace ServiceHub.Room.Testing.Service
                 Gender = "M"
             };
 
-            context.Insert(room);
-            context.Insert(room1);
-            results = context.Get();
+            await context.Insert(room);
+            await context.Insert(room1);
+            results = context.Get().Result;
             Assert.Equal(2,results.Count);
         }
 
         [Fact]
-        public void TestGetByID()
+        public async void TestGetByID()
         {
             context = new RoomRepositoryMemory();
             Address address = new Address
@@ -168,14 +170,14 @@ namespace ServiceHub.Room.Testing.Service
                 Occupancy = 2,
                 Gender = "M"
             };
-            context.Insert(room);
-            Room.Context.Models.Room result = context.GetById(room.RoomId);
+            await context.Insert(room);
+            Room.Context.Models.Room result = context.GetById(room.RoomId).Result;
 
             Assert.Equal(room.RoomId,result.RoomId);
         }
 
         [Fact]
-        public void TestUpdate()
+        public async void TestUpdate()
         {
             context = new RoomRepositoryMemory();
             Address address = new Address
@@ -198,16 +200,16 @@ namespace ServiceHub.Room.Testing.Service
                 Occupancy = 2,
                 Gender = "M"
             };
-            context.Insert(room);
+            await context.Insert(room);
 
             room.Location = "Dallas";
-            context.Update(room);
+            await context.Update(room);
 
-            Assert.Equal("Dallas",context.GetById(room.RoomId).Location);
+            Assert.Equal("Dallas",context.GetById(room.RoomId).Result.Location);
         }
 
         [Fact]
-        public void TestDelete()
+        public async void TestDelete()
         {
             context = new RoomRepositoryMemory();
             Address address = new Address
@@ -230,9 +232,9 @@ namespace ServiceHub.Room.Testing.Service
                 Occupancy = 2,
                 Gender = "M"
             };
-            context.Insert(room);
+            await context.Insert(room);
             
-            context.Delete(room.RoomId);
+            await context.Delete(room.RoomId);
 
             Assert.Empty(context.roomList);
         }
