@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Authentication;
-using System.Text;
-using MongoDB.Bson;
+using System.Threading.Tasks;
 using MongoDB.Driver;
-using ServiceHub.Room.Context.Models;
 
 namespace ServiceHub.Room.Context.Repository
 {
-    public class RoomsRepository: IRoomsRepository
+
+    public class RoomsRepository : IRoomsRepository
     {
         private readonly IMongoCollection<Models.Room> _collection;
 
@@ -28,28 +24,28 @@ namespace ServiceHub.Room.Context.Repository
         /// Creates a room within the MongoDatabase. If the room is null an ArgumentNullException is thrown.
         /// </summary>
         /// <param name="room"></param>
-        public void Insert(Models.Room room)
+        public async Task Insert(Models.Room room)
         {
             if (room == null)
             {
                 throw new ArgumentNullException(nameof(room));
             }
-            _collection.InsertOne(room);
+
+            await _collection.InsertOneAsync(room);
         }
 
         /// <summary>
         /// Gets all rooms from the Mongo database.
         /// </summary>
         /// <returns>Returns a list of all the Models.Room within the database. If no rooms are found it returns an ArgumentNullException.</returns>
-        public List<Models.Room> Get()
+        public async Task<List<Models.Room>> Get()
         {
             if (_collection == null)
             {
                 throw new ArgumentNullException(nameof(_collection));
             }
 
-            return _collection.AsQueryable().ToList();
-
+            return await _collection.AsQueryable().ToListAsync();
         }
 
         /// <summary>
@@ -57,15 +53,14 @@ namespace ServiceHub.Room.Context.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Returns a Models.Room object from the database. Returns an ArgumentNullException is the room exists based on the id.</returns>
-        public Models.Room GetById(Guid id)
+        public async Task<Models.Room> GetById(Guid id)
         {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }
-            Models.Room room = _collection.Find(x => x.RoomId == id).Single();
-            return room;
 
+            return await _collection.FindAsync(x => x.RoomId == id).Result.SingleAsync();
         }
 
         /// <summary>
@@ -74,14 +69,21 @@ namespace ServiceHub.Room.Context.Repository
         /// If no room object corresponds with the passed in room, no room is updated.
         /// </summary>
         /// <param name="room"></param>
-        public void Update(Models.Room room)
+        public async Task Update(Models.Room room)
         {
             if (room == null)
             {
                 throw new ArgumentNullException(nameof(room));
             }
 
-            _collection.FindOneAndReplace(x => x.RoomId == room.RoomId, room);
+            var filter = Builders<Models.Room>.Filter.Eq(x => x.RoomId, room.RoomId);
+
+            var update = Builders<Models.Room>.Update
+                .Set(x => x.Location, room.Location)
+                .Set(x => x.Gender, room.Gender)
+                .Set(x => x.Vacancy, room.Vacancy);
+
+            await _collection.UpdateOneAsync(filter, update);
         }
 
         /// <summary>
@@ -89,14 +91,15 @@ namespace ServiceHub.Room.Context.Repository
         /// If the RoomId is not found an ArgumentNullException is thrown.
         /// </summary>
         /// <param name="id"></param>
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }
 
-            _collection.DeleteOne(x => x.RoomId == id);
+            await _collection.DeleteOneAsync(x => x.RoomId == id);
         }
     }
+
 }

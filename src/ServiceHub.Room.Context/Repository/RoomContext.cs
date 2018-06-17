@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace ServiceHub.Room.Context.Repository
 {
@@ -22,18 +21,18 @@ namespace ServiceHub.Room.Context.Repository
         /// Creates a Models.Room object in the data source.
         /// </summary>
         /// <param name="room"></param>
-        public void Insert(Models.Room room)
+        public async Task Insert(Models.Room room)
         {
-            _roomRepository.Insert(room);
+            await _roomRepository.Insert(room);
         }
 
         /// <summary>
         /// Gets all Models.Room objects from a data source.
         /// </summary>
         /// <returns>Returns all Models.Room objects from the give data source.</returns>
-        public List<Models.Room> Get()
+        public async Task<List<Models.Room>> Get()
         {
-            return _roomRepository.Get();
+            return await _roomRepository.Get();
         }
 
         /// <summary>
@@ -41,28 +40,27 @@ namespace ServiceHub.Room.Context.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns>>Returns Models.Room objects from the give data source based on the Guid.</returns>
-        public Models.Room GetById(Guid id)
+        public async Task<Models.Room> GetById(Guid id)
         {
-            return _roomRepository.GetById(id);
+            return await  _roomRepository.GetById(id);
         }
 
         /// <summary>
         /// Updates a Models.Room object within the data source.
         /// </summary>
         /// <param name="room"></param>
-        public void Update(Models.Room room)
+        public async Task Update(Models.Room room)
         {
-            _roomRepository.Update(room);
+            await _roomRepository.Update(room);
         }
 
         /// <summary>
         /// Deletes a Models.Room object from the data source based on a Guid.
         /// </summary>
         /// <param name="id"></param>
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            _roomRepository.Delete(id);
+            await _roomRepository.Delete(id);
         }
-
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace ServiceHub.Room.Context.Repository
 {
@@ -11,11 +10,10 @@ namespace ServiceHub.Room.Context.Repository
         /// Interface for the CRUD functionality of the Room repository
         /// </summary>
         /// <param name="room"></param>
-        void Insert(Models.Room room);
-        List<Models.Room> Get();
-        Models.Room GetById(Guid id);
-        void Update(Models.Room room);
-        void Delete(Guid id);
-
+        Task Insert(Models.Room room);
+        Task<List<Models.Room>> Get();
+        Task<Models.Room> GetById(Guid id);
+        Task Update(Models.Room room);
+        Task Delete(Guid id);
     }
 }
