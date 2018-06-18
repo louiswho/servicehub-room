@@ -60,20 +60,19 @@ namespace ServiceHub.Room.Context.Utilities
         /// <param name="contextRooms">A list of context model Rooms.</param>
         /// <returns>List of converted Room library models. Null if a model in the list is invalid and cannot be mapped.</returns>
         public static List<Library.Models.Room> ContextToLibrary(List<Models.Room> contextRooms) {
+            var result = new List<Library.Models.Room>();
+
             if (contextRooms == null) {
-                return null;
+                return result;
             }
             
-            List<Library.Models.Room> result = new List<Library.Models.Room>();
-
             foreach (var room in contextRooms) {
                 var libRoom = ContextToLibrary(room);
                 if (libRoom == null) {
-                    return null;
+                    return new List<Library.Models.Room>();
                 }
-                else {
-                    result.Add(libRoom);
-                }
+
+                result.Add(libRoom);
             }
 
             return result;
