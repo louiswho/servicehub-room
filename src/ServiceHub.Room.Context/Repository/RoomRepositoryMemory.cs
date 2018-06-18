@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ServiceHub.Room.Context.Models;
 
 namespace ServiceHub.Room.Context.Repository
 {
@@ -12,7 +13,9 @@ namespace ServiceHub.Room.Context.Repository
     /// </summary>
     public class RoomRepositoryMemory : IRoomsRepository
     {
-        public List<Models.Room> roomList = new List<Models.Room>();
+        private List<Models.Room> roomList = new List<Models.Room>();
+
+        public List<Models.Room> RoomList { get => roomList; set => roomList = value; }
 
         /// <inheritdoc />
         /// <summary>
@@ -21,7 +24,7 @@ namespace ServiceHub.Room.Context.Repository
         /// <param name="room"></param>
         public Task InsertAsync(Models.Room room)
         {
-            roomList.Add(room);
+            RoomList.Add(room);
             return Task.CompletedTask;
         }
 
@@ -32,7 +35,7 @@ namespace ServiceHub.Room.Context.Repository
         /// <returns>A list with all rooms within it. Returns an empty list of rooms.</returns>
         public Task<List<Models.Room>> GetAsync()
         {
-            return Task.FromResult(roomList);
+            return Task.FromResult(RoomList);
         }
 
         /// <inheritdoc />
@@ -43,7 +46,7 @@ namespace ServiceHub.Room.Context.Repository
         /// <returns>Returns a Models.Room object. If no room exists it returns null</returns>
         public Task<Models.Room> GetByIdAsync(Guid id)
         {
-            var room = roomList.Find(x => x.RoomId == id);
+            var room = RoomList.Find(x => x.RoomId == id);
 
             return Task.FromResult(room);
         }
@@ -55,10 +58,10 @@ namespace ServiceHub.Room.Context.Repository
         /// <param name="room"></param>
         public Task UpdateAsync(Models.Room room)
         {
-            var index = roomList.IndexOf(roomList.Single(x => x.RoomId == room.RoomId));
+            var index = RoomList.IndexOf(RoomList.Single(x => x.RoomId == room.RoomId));
             if (index >= 0)
             {
-                roomList[index] = room;
+                RoomList[index] = room;
             }
 
             return Task.CompletedTask;
@@ -71,7 +74,7 @@ namespace ServiceHub.Room.Context.Repository
         /// <param name="id"></param>
         public Task DeleteAsync(Guid id)
         {
-            roomList.Remove(roomList.Find(x => x.RoomId == id));
+            RoomList.Remove(RoomList.Find(x => x.RoomId == id));
 
             return Task.CompletedTask;
         }

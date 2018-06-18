@@ -223,7 +223,7 @@ namespace ServiceHub.Room.Testing.Service
             _room.Address = _address;
             await _context.InsertAsync(ModelMapper.LibraryToContext(_room));
             
-            Assert.NotEmpty(_context.roomList);
+            Assert.NotEmpty(_context.RoomList);
             var myTask = roomController.Delete(_room.RoomId);
 
             var result = await myTask;
@@ -233,7 +233,7 @@ namespace ServiceHub.Room.Testing.Service
             var code = contentResult.StatusCode;            
 
             Assert.InRange(code, 200, 299);
-            Assert.Empty(_context.roomList);
+            Assert.Empty(_context.RoomList);
 
         }
         [Fact]
@@ -244,7 +244,7 @@ namespace ServiceHub.Room.Testing.Service
             _room.Address = _address;
             await _context.InsertAsync(ModelMapper.LibraryToContext(_room));
 
-            Assert.NotEmpty(_context.roomList);
+            Assert.NotEmpty(_context.RoomList);
             var badId = Guid.Empty;
             var myTask = roomController.Delete(badId);
             var result = await myTask;
@@ -263,7 +263,7 @@ namespace ServiceHub.Room.Testing.Service
             _room.Address = _address;
             await _context.InsertAsync(ModelMapper.LibraryToContext(_room));
 
-            Assert.NotEmpty(_context.roomList);
+            Assert.NotEmpty(_context.RoomList);
             var badId = Guid.NewGuid();
             var myTask = roomController.Delete(badId);
             var result = await myTask;
