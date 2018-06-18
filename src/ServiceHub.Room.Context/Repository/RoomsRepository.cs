@@ -27,10 +27,7 @@ namespace ServiceHub.Room.Context.Repository
         /// <param name="room"></param>
         public async Task InsertAsync(Models.Room room)
         {
-            if (room == null)
-            {
-                throw new ArgumentNullException(nameof(room));
-            }
+            RoomCheck(room);
 
             await _collection.InsertOneAsync(room);
         }
@@ -58,10 +55,7 @@ namespace ServiceHub.Room.Context.Repository
         /// <returns>Returns a Models.Room object from the database. Returns an ArgumentNullException is the room exists based on the id.</returns>
         public async Task<Models.Room> GetByIdAsync(Guid id)
         {
-            if (id == Guid.Empty)
-            {
-                throw new ArgumentException(nameof(id));
-            }
+            GuidCheck(id);
 
             return await _collection.FindAsync(x => x.RoomId == id).Result.SingleAsync();
         }
@@ -75,10 +69,7 @@ namespace ServiceHub.Room.Context.Repository
         /// <param name="room"></param>
         public async Task UpdateAsync(Models.Room room)
         {
-            if (room == null)
-            {
-                throw new ArgumentNullException(nameof(room));
-            }
+            RoomCheck(room);
 
             var filter = Builders<Models.Room>.Filter.Eq(x => x.RoomId, room.RoomId);
 
@@ -98,12 +89,25 @@ namespace ServiceHub.Room.Context.Repository
         /// <param name="id"></param>
         public async Task DeleteAsync(Guid id)
         {
+            GuidCheck(id);
+
+            await _collection.DeleteOneAsync(x => x.RoomId == id);
+        }
+
+        private void RoomCheck(Models.Room room)
+        {
+            if (room == null)
+            {
+                throw new ArgumentNullException(nameof(room));
+            }
+        }
+
+        private void GuidCheck(Guid id)
+        {
             if (id == Guid.Empty)
             {
                 throw new ArgumentException(nameof(id));
             }
-
-            await _collection.DeleteOneAsync(x => x.RoomId == id);
         }
     }
 
