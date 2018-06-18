@@ -31,7 +31,7 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 ctxRooms = await _context.GetAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 logger.LogError(e, "No rooms were found in the database.", null);
                 return StatusCode(500);
@@ -39,7 +39,7 @@ namespace ServiceHub.Room.Service.Controllers
 
             var rooms = ModelMapper.ContextToLibrary(ctxRooms);
 
-            if (rooms == null)
+            if (rooms.Count == 0)
             {
                 logger.LogError("Rooms pulled from database cannot be converted to a room model.", null);
                 return StatusCode(500);
@@ -100,7 +100,7 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 value.RoomId = Guid.NewGuid();
             }
-        
+
             if (!value.isValidState())
             {
                 return BadRequest("Complete model required for insertions.");
@@ -110,7 +110,8 @@ namespace ServiceHub.Room.Service.Controllers
 
             if (room == null)
             {
-                logger.LogError("Room model cannot be converted to a room valid to be inserted into the database.", null);
+                logger.LogError("Room model cannot be converted to a room valid to be inserted into the database.",
+                    null);
                 return StatusCode(500);
             }
 
@@ -122,7 +123,7 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 return BadRequest("Cannot insert duplicate record.");
             }
-            
+
             return CreatedAtRoute("GetById", new {id = value.RoomId}, value);
         }
 
@@ -143,7 +144,7 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 return BadRequest("Identifier required for record editing.");
             }
-            
+
             Context.Models.Room ctxItem;
             try
             {
@@ -153,7 +154,7 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 return NotFound($"Resource does not exist under RoomId: {roomMod.RoomId}");
             }
-            
+
             var item = ModelMapper.ContextToLibrary(ctxItem);
 
             if (item == null)
@@ -190,21 +191,14 @@ namespace ServiceHub.Room.Service.Controllers
             if (item.isValidState())
             {
                 var newCtxItem = ModelMapper.LibraryToContext(item);
-                if (newCtxItem != null)
+
+                try
                 {
-                    try
-                    {
-                        await _context.UpdateAsync(newCtxItem);
-                    }
-                    catch(Exception e)
-                    {
-                        logger.LogError(e, "Room model cannot update a room within the database.", null);
-                        return StatusCode(500);
-                    }
+                    await _context.UpdateAsync(newCtxItem);
                 }
-                else
+                catch (Exception e)
                 {
-                    logger.LogError("Room model is invalid after being converted to a room in the database.", null);
+                    logger.LogError(e, "Room model cannot update a room within the database.", null);
                     return StatusCode(500);
                 }
             }
@@ -237,7 +231,7 @@ namespace ServiceHub.Room.Service.Controllers
             }
 
             roomMod.RoomId = id;
-            
+
             return await Put(roomMod);
         }
 
@@ -259,7 +253,7 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 var item = await _context.GetByIdAsync(id);
 
-                if(item == null)
+                if (item == null)
                 {
                     return NotFound("Item not in Database");
                 }
@@ -273,7 +267,7 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 await _context.DeleteAsync(id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 logger.LogError(e, "Room trying to be deleted from database could not be deleted.", null);
                 return StatusCode(500);
@@ -282,4 +276,5 @@ namespace ServiceHub.Room.Service.Controllers
             return NoContent();
         }
     }
+
 }

@@ -20,6 +20,7 @@ namespace ServiceHub.Room.Context.Repository
             _collection = collection;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Creates a room within the MongoDatabase. If the room is null an ArgumentNullException is thrown.
         /// </summary>
@@ -34,6 +35,7 @@ namespace ServiceHub.Room.Context.Repository
             await _collection.InsertOneAsync(room);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets all rooms from the Mongo database.
         /// </summary>
@@ -42,12 +44,13 @@ namespace ServiceHub.Room.Context.Repository
         {
             if (_collection == null)
             {
-                throw new ArgumentNullException(nameof(_collection));
+                return new List<Models.Room>();
             }
 
             return await _collection.AsQueryable().ToListAsync();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets all rooms from the Mongo database based on the Guid passed in.
         /// </summary>
@@ -55,14 +58,15 @@ namespace ServiceHub.Room.Context.Repository
         /// <returns>Returns a Models.Room object from the database. Returns an ArgumentNullException is the room exists based on the id.</returns>
         public async Task<Models.Room> GetByIdAsync(Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(id));
+                throw new ArgumentException(nameof(id));
             }
 
             return await _collection.FindAsync(x => x.RoomId == id).Result.SingleAsync();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Updates a Models.Room object in the database based on the RoomId.
         /// If a room object is not passed in an ArgumentNullException is thrown.
@@ -86,6 +90,7 @@ namespace ServiceHub.Room.Context.Repository
             await _collection.UpdateOneAsync(filter, update);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Deletes a Models.Room object in the database based on the RoomId.
         /// If the RoomId is not found an ArgumentNullException is thrown.
@@ -93,9 +98,9 @@ namespace ServiceHub.Room.Context.Repository
         /// <param name="id"></param>
         public async Task DeleteAsync(Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(id));
+                throw new ArgumentException(nameof(id));
             }
 
             await _collection.DeleteOneAsync(x => x.RoomId == id);
