@@ -149,7 +149,7 @@ namespace ServiceHub.Room.Testing.Context {
 
         [Fact]
         public void EmptyModelInput() {
-            Room.Context.Models.Room emptyRoom = new Room.Context.Models.Room();
+            var emptyRoom = new Room.Context.Models.Room();
 
             var actual = ModelMapper.ContextToLibrary(emptyRoom);
 
@@ -224,12 +224,12 @@ namespace ServiceHub.Room.Testing.Context {
 
             var actual = ModelMapper.ContextToLibrary(nullList);
 
-            Assert.Null(actual);
+            Assert.Empty(actual);
         }
 
         [Fact]
         public void EmptyParameter() {
-            List<Room.Context.Models.Room> emptyList = new List<Room.Context.Models.Room>();
+            var emptyList = new List<Room.Context.Models.Room>();
 
             var actual = ModelMapper.ContextToLibrary(emptyList);
 
@@ -275,7 +275,7 @@ namespace ServiceHub.Room.Testing.Context {
 
             var actual = ModelMapper.ContextToLibrary(ctxRooms);
 
-            Assert.Null(actual);
+            Assert.Empty(actual);
         }
 
         [Fact]
