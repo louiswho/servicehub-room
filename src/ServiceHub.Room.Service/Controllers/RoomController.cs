@@ -12,11 +12,11 @@ namespace ServiceHub.Room.Service.Controllers
     [Route("api/Rooms")]
     public class RoomController : BaseController
     {
-        private readonly RoomContext _context;
+        private readonly IRoomsRepository _context;
 
         public RoomController(ILoggerFactory loggerFactory, IRoomsRepository repo) : base(loggerFactory)
         {
-            _context = new RoomContext(repo);
+            _context = repo;
         }
 
         /// <summary>
@@ -31,8 +31,9 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 ctxRooms = await _context.GetAsync();
             }
-            catch
+            catch(Exception e)
             {
+                logger.LogError(e, "No rooms were found in the database.", null);
                 return StatusCode(500);
             }
 
@@ -40,6 +41,7 @@ namespace ServiceHub.Room.Service.Controllers
 
             if (rooms == null)
             {
+                logger.LogError("Rooms pulled from database cannot be converted to a room model.", null);
                 return StatusCode(500);
             }
 
@@ -52,7 +54,7 @@ namespace ServiceHub.Room.Service.Controllers
         /// <param name="id">RoomId to search for.</param>
         /// <returns>A matching item if found, error otherwise.</returns>
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id}", Name = "GetById")]
         public async Task<IActionResult> Get(Guid id)
         {
             if (id == Guid.Empty)
@@ -74,6 +76,7 @@ namespace ServiceHub.Room.Service.Controllers
 
             if (room == null)
             {
+                logger.LogError("Room pulled from database cannot be converted to a room model.", null);
                 return StatusCode(500);
             }
 
@@ -107,6 +110,7 @@ namespace ServiceHub.Room.Service.Controllers
 
             if (room == null)
             {
+                logger.LogError("Room model cannot be converted to a room valid to be inserted into the database.", null);
                 return StatusCode(500);
             }
 
@@ -118,8 +122,8 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 return BadRequest("Cannot insert duplicate record.");
             }
-
-            return CreatedAtRoute("Rooms", new {id = value.RoomId}, value);
+            
+            return CreatedAtRoute("GetById", new {id = value.RoomId}, value);
         }
 
         /// <summary>
@@ -154,6 +158,7 @@ namespace ServiceHub.Room.Service.Controllers
 
             if (item == null)
             {
+                logger.LogError("Room pulled from database cannot be converted to a room model", null);
                 return StatusCode(500);
             }
 
@@ -191,13 +196,15 @@ namespace ServiceHub.Room.Service.Controllers
                     {
                         await _context.UpdateAsync(newCtxItem);
                     }
-                    catch
+                    catch(Exception e)
                     {
+                        logger.LogError(e, "Room model cannot update a room within the database.", null);
                         return StatusCode(500);
                     }
                 }
                 else
                 {
+                    logger.LogError("Room model is invalid after being converted to a room in the database.", null);
                     return StatusCode(500);
                 }
             }
@@ -266,8 +273,9 @@ namespace ServiceHub.Room.Service.Controllers
             {
                 await _context.DeleteAsync(id);
             }
-            catch
+            catch(Exception e)
             {
+                logger.LogError(e, "Room trying to be deleted from database could not be deleted.", null);
                 return StatusCode(500);
             }
 

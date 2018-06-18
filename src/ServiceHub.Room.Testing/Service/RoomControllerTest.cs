@@ -52,7 +52,7 @@ namespace ServiceHub.Room.Testing.Service
             RoomController roomController = new RoomController(new LoggerFactory(), context);
 
             //Act
-            var myTask = Task.Run(() => roomController.Get());
+            var myTask = roomController.Get();
             var result = await myTask;
             var contentResult = result as OkObjectResult;
 
@@ -73,7 +73,7 @@ namespace ServiceHub.Room.Testing.Service
             await context.InsertAsync(ModelMapper.LibraryToContext(room));
             RoomController roomController = new RoomController(new LoggerFactory(), context);
 
-            var myTask = Task.Run(() => roomController.Get(id));
+            var myTask = roomController.Get(id);
             var result = await myTask;
             var contentResult = result as OkObjectResult;
 
@@ -91,7 +91,7 @@ namespace ServiceHub.Room.Testing.Service
             await context.InsertAsync(ModelMapper.LibraryToContext(room));
             RoomController roomController = new RoomController(new LoggerFactory(), context);
 
-            var myTask = Task.Run(() => roomController.Get(Guid.Empty));
+            var myTask = roomController.Get(Guid.Empty);
             var result = await myTask;
            
 
@@ -110,13 +110,13 @@ namespace ServiceHub.Room.Testing.Service
             RoomController roomController = new RoomController(new LoggerFactory(), context);
 
             //Act
-            var myTask = Task.Run(() => roomController.Post(room));
+            var myTask = roomController.Post(room);
             var result = await myTask;
 
             var contentResult = result as CreatedAtRouteResult;
             Assert.NotNull(contentResult);
             int code = (int)contentResult.StatusCode;
-            Assert.InRange(code,200,300);
+            Assert.InRange(code,200,299);
         }
 
         [Fact]
@@ -128,7 +128,7 @@ namespace ServiceHub.Room.Testing.Service
             room.Location = null;
 
             //Act
-            var myTask = Task.Run(() => roomController.Post(room));
+            var myTask = roomController.Post(room);
             var result = await myTask;
 
             var contentResult = result as BadRequestObjectResult;
@@ -147,7 +147,7 @@ namespace ServiceHub.Room.Testing.Service
             await context.InsertAsync(ModelMapper.LibraryToContext(room));
             room.Location = "Dallas";
 
-            var myTask = Task.Run(() => roomController.Put(room));
+            var myTask = roomController.Put(room);
             var result = await myTask;
 
             //var contentResult = result as StatusCodeResult;
@@ -168,7 +168,7 @@ namespace ServiceHub.Room.Testing.Service
             await context.InsertAsync(ModelMapper.LibraryToContext(room));
             room.Location = "Dallas";
 
-            var myTask = Task.Run(() => roomController.Put(room.RoomId,room));
+            var myTask = roomController.Put(room.RoomId,room);
             var result = await myTask;
             
             var contentResult = result as NoContentResult;
@@ -188,7 +188,7 @@ namespace ServiceHub.Room.Testing.Service
             room.RoomId = Guid.Empty;
 
             //Act
-            var myTask = Task.Run(() => roomController.Put(room));
+            var myTask = roomController.Put(room);
             var result = await myTask;
             
             var contentResult = result as BadRequestObjectResult;
@@ -207,13 +207,13 @@ namespace ServiceHub.Room.Testing.Service
             await context.InsertAsync(ModelMapper.LibraryToContext(room));
             
             Assert.NotEmpty(context.roomList);
-            var myTask = Task.Run(() => roomController.Delete(room.RoomId));
+            var myTask = roomController.Delete(room.RoomId);
             var result = await myTask;
 
             var contentResult = result as StatusCodeResult;
             Assert.NotNull(contentResult);
             int code = (int)contentResult.StatusCode;            
-            Assert.InRange(code, 200, 300);
+            Assert.InRange(code, 200, 299);
             Assert.Empty(context.roomList);
         }
         [Fact]
@@ -226,7 +226,7 @@ namespace ServiceHub.Room.Testing.Service
 
             Assert.NotEmpty(context.roomList);
             var badId = Guid.Empty;
-            var myTask = Task.Run(() => roomController.Delete(badId));
+            var myTask = roomController.Delete(badId);
             var result = await myTask;
 
             var contentResult = result as BadRequestObjectResult;
@@ -245,7 +245,7 @@ namespace ServiceHub.Room.Testing.Service
 
             Assert.NotEmpty(context.roomList);
             var badId = Guid.NewGuid();
-            var myTask = Task.Run(() => roomController.Delete(badId));
+            var myTask = roomController.Delete(badId);
             var result = await myTask;
 
             var contentResult = result as NotFoundObjectResult;
