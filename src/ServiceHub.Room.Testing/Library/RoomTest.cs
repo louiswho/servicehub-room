@@ -11,7 +11,7 @@ namespace ServiceHub.Room.Testing.Library
         {
             Room.Library.Models.Room room = new Room.Library.Models.Room();
             
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace ServiceHub.Room.Testing.Library
                 Occupancy = 2,
                 Gender = ""
             };
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
             
-            Assert.True(room.isValidState());
+            Assert.True(room.IsValidState());
         }
 
         [Fact]
@@ -79,7 +79,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
             
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
 
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
 
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
             
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -187,7 +187,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
 
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -214,7 +214,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
             
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -241,7 +241,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
             
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -268,7 +268,7 @@ namespace ServiceHub.Room.Testing.Library
                 //Gender = "M"
             };
             
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
 
         [Fact]
@@ -298,7 +298,7 @@ namespace ServiceHub.Room.Testing.Library
                 Gender = ""
             };
             
-            Assert.False(room.isValidState());
+            Assert.False(room.IsValidState());
         }
     }
 }
