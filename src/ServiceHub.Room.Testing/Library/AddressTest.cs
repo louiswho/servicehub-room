@@ -11,7 +11,7 @@ namespace ServiceHub.Room.Testing.Library
         {
             Address address = new Address();
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
 
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.True(address.isValidState());
+            Assert.True(address.IsValidState());
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace ServiceHub.Room.Testing.Library
                 //State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -112,7 +112,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Cal"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "C"
             };
 
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -146,7 +146,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -163,7 +163,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -180,7 +180,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -197,7 +197,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -214,7 +214,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
 
         [Fact]
@@ -231,7 +231,7 @@ namespace ServiceHub.Room.Testing.Library
                 State = "Ca"
             };
             
-            Assert.False(address.isValidState());
+            Assert.False(address.IsValidState());
         }
     }
 }

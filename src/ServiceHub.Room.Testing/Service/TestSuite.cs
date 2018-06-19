@@ -251,7 +251,7 @@ namespace ServiceHub.Room.Testing.Service
             
             await _context.DeleteAsync(room.RoomId);
 
-            Assert.Empty(_context.roomList);
+            Assert.Empty(_context.RoomList);
         }
     }
 }

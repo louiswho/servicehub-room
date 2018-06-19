@@ -75,15 +75,15 @@ namespace ServiceHub.Room.Library.Models
         /// Checks if state of model is valid
         /// </summary>
         /// <returns>True if the model is valid, false otherwise.</returns>
-        public bool isValidState()
+        public bool IsValidState()
         {
             if (AddressId == Guid.Empty) { return false; }
-            if (String.IsNullOrEmpty(Address1) || Address1?.Length > 255) { return false; }
+            if (string.IsNullOrEmpty(Address1) || Address1?.Length > 255) { return false; }
             if (Address2?.Length > 255) { return false; }
-            if (String.IsNullOrEmpty(City) || City?.Length > 25) { return false; }
-            if (String.IsNullOrEmpty(State) || !StateCodes.Contains(State.ToUpper())) { return false; }
-            if (String.IsNullOrEmpty(PostalCode) || PostalCode.Length != 5 || !PostalCode.All(Char.IsDigit)) { return false; }
-            if (String.IsNullOrEmpty(Country) || !CountryCodes.Contains(Country.ToUpper())) { return false; }
+            if (string.IsNullOrEmpty(City) || City?.Length > 25) { return false; }
+            if (string.IsNullOrEmpty(State) || !StateCodes.Contains(State.ToUpper())) { return false; }
+            if (string.IsNullOrEmpty(PostalCode) || PostalCode.Length != 5 || !PostalCode.All(char.IsDigit)) { return false; }
+            if (string.IsNullOrEmpty(Country) || !CountryCodes.Contains(Country.ToUpper())) { return false; }
 
             return true;
         }
