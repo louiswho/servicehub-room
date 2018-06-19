@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -152,6 +151,101 @@ namespace ServiceHub.Room.Service
                         City = "Tampa",
                         State = "FL",
                         PostalCode = "36755",
+                        Country = "US"
+                    }
+                });
+
+                await context.InsertAsync(new Context.Models.Room()
+                {
+                    RoomId = Guid.Parse("eff1ad86-f554-41fe-82fe-09ca9953b661"),
+                    Location = "Tampa",
+                    Gender = "",
+                    Occupancy = 4,
+                    Vacancy = 4,
+                    Address = new Address()
+                    {
+                        AddressId = Guid.Parse("0a04cf68-a46e-4d17-b1cb-a5eb912f940d"),
+                        Address1 = "53531 Crown Street",
+                        Address2 = "Apt 258",
+                        City = "Tampa",
+                        State = "FL",
+                        PostalCode = "38197",
+                        Country = "US"
+                    }
+                });
+
+                await context.InsertAsync(new Context.Models.Room()
+                {
+                    RoomId = Guid.Parse("e9bba566-55f4-4f00-b83b-40ad6286f73a"),
+                    Location = "New York",
+                    Gender = "",
+                    Occupancy = 6,
+                    Vacancy = 6,
+                    Address = new Address()
+                    {
+                        AddressId = Guid.Parse("43694605-d2f9-4979-870d-7b31145f3f71"),
+                        Address1 = "24608 Horace Court",
+                        Address2 = "Apt 620",
+                        City = "New York",
+                        State = "NY",
+                        PostalCode = "53970",
+                        Country = "US"
+                    }
+                });
+
+                await context.InsertAsync(new Context.Models.Room()
+                {
+                    RoomId = Guid.Parse("4ceab2c8-9ab4-4140-b84c-42b38485795d"),
+                    Location = "New York",
+                    Gender = "",
+                    Occupancy = 4,
+                    Vacancy = 4,
+                    Address = new Address()
+                    {
+                        AddressId = Guid.Parse("7621744b-c5d6-4884-9ac0-fee7d2fffcee"),
+                        Address1 = "24608 Horace Court",
+                        Address2 = "Apt 145",
+                        City = "New York",
+                        State = "NY",
+                        PostalCode = "53970",
+                        Country = "US"
+                    }
+                });
+
+                await context.InsertAsync(new Context.Models.Room()
+                {
+                    RoomId = Guid.Parse("1fa895d8-f239-4178-b761-c2dc3ba84524"),
+                    Location = "New York",
+                    Gender = "",
+                    Occupancy = 3,
+                    Vacancy = 3,
+                    Address = new Address()
+                    {
+                        AddressId = Guid.Parse("97946ec1-16a2-4298-a42e-c9d1be4f5128"),
+                        Address1 = "8015 Pine Street",
+                        Address2 = "Apt 562",
+                        City = "New York",
+                        State = "NY",
+                        PostalCode = "25472",
+                        Country = "US"
+                    }
+                });
+
+                await context.InsertAsync(new Context.Models.Room()
+                {
+                    RoomId = Guid.Parse("4b51ff27-1e3d-4f3f-94d6-f6e1b670a588"),
+                    Location = "New York",
+                    Gender = "",
+                    Occupancy = 5,
+                    Vacancy = 5,
+                    Address = new Address()
+                    {
+                        AddressId = Guid.Parse("68e51ff8-bddf-410a-8b06-3d967d3f9a17"),
+                        Address1 = "96543 Dare Court",
+                        Address2 = "Apt 278",
+                        City = "New York",
+                        State = "NY",
+                        PostalCode = "76458",
                         Country = "US"
                     }
                 });
