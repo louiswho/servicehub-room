@@ -49,7 +49,8 @@ namespace ServiceHub.Room.Service
             app.UseSwagger();
             app.UseSwaggerUI(doc =>
             {
-                doc.SwaggerEndpoint("/swagger/ServiceHub-Room/swagger.json", "ServiceHub-Room");
+                const string url = "/swagger/ServiceHub-Room/swagger.json";
+                doc.SwaggerEndpoint(url, "ServiceHub-Room");
             });
 
             app.UseMvc();
