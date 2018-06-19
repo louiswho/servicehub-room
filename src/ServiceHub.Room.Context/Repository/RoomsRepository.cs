@@ -44,7 +44,14 @@ namespace ServiceHub.Room.Context.Repository
                 return new List<Models.Room>();
             }
 
-            return await _collection.AsQueryable().ToListAsync();
+            try
+            {
+                return await _collection.AsQueryable().ToListAsync();
+            }
+            catch
+            {
+                return new List<Models.Room>();
+            }
         }
 
         /// <inheritdoc />

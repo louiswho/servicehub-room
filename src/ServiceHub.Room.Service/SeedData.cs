@@ -8,14 +8,15 @@ using ServiceHub.Room.Context.Repository;
 
 namespace ServiceHub.Room.Service
 {
+
     public static class SeedData
     {
         public static async Task InitializeAsync(IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetRequiredService<IRoomsRepository>();
 
-            // No initialization necessary
-            if (context.GetAsync().Result.Any()) return;
+            var data = await context.GetAsync();
+            if (data != null && data.Count > 0) return;
 
             var logger = ServiceLogging.Create();
 
@@ -155,10 +156,11 @@ namespace ServiceHub.Room.Service
                     }
                 });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 logger.LogError(e, e.Message);
             }
         }
     }
+
 }
