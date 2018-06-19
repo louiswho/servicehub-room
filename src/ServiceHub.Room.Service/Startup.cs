@@ -20,7 +20,7 @@ namespace ServiceHub.Room.Service
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string demodb = @"mongodb://db";
+            const string demodb = @"mongodb://db";
 
             services.AddSingleton(mc =>
                 new MongoClient(demodb).GetDatabase("rooms").GetCollection<Context.Models.Room>("rooms"));
@@ -34,6 +34,9 @@ namespace ServiceHub.Room.Service
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddApplicationInsights(app.ApplicationServices);
+
+            ServiceLogging.Configure("service");
+            ServiceLogging.LoggerFactory = loggerFactory;
 
             if (env.IsDevelopment())
             {
