@@ -13,9 +13,7 @@ namespace ServiceHub.Room.Context.Repository
     /// </summary>
     public class RoomRepositoryMemory : IRoomsRepository
     {
-        private List<Models.Room> roomList = new List<Models.Room>();
-
-        public List<Models.Room> RoomList { get => roomList; set => roomList = value; }
+        public List<Models.Room> RoomList { get; set; } = new List<Models.Room>();
 
         /// <inheritdoc />
         /// <summary>

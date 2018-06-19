@@ -52,11 +52,11 @@ namespace ServiceHub.Room.Library.Models
 
         ///<summary> Checks if state of model is valid </summary>
         /// <returns>True if the model is valid, false otherwise.</returns>
-        public bool isValidState()
+        public bool IsValidState()
         {
             if (RoomId == Guid.Empty) { return false; }
-            if (String.IsNullOrEmpty(Location) || Location?.Length > 255 || Location?.Length <= 0) { return false; }
-            if (Address == null || !Address.isValidState()) { return false; }
+            if (string.IsNullOrEmpty(Location) || Location?.Length > 255 || Location?.Length <= 0) { return false; }
+            if (Address == null || !Address.IsValidState()) { return false; }
             if (Occupancy == null || Occupancy <= 0) { return false; }
             if (Vacancy == null || Vacancy > Occupancy || Vacancy < 0) { return false; }
             if (Gender == null || !Genders.Contains(Gender.ToUpper())) { return false; }

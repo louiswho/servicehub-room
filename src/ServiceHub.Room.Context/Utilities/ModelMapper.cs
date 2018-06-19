@@ -14,7 +14,7 @@ namespace ServiceHub.Room.Context.Utilities
         /// <param name="libraryRoom">Library model Room</param>
         /// <returns>Converted Room context model. Null if given model is invalid and cannot be mapped.</returns>
         public static Models.Room LibraryToContext(Library.Models.Room libraryRoom) {
-            if (libraryRoom == null || !libraryRoom.isValidState()) {
+            if (libraryRoom == null || !libraryRoom.IsValidState()) {
                 return null;
             }
 
@@ -47,7 +47,7 @@ namespace ServiceHub.Room.Context.Utilities
                 Gender = contextRoom.Gender
             };
 
-            if (!libRoom.isValidState()) {
+            if (!libRoom.IsValidState()) {
                 return null;
             }
 
@@ -84,7 +84,7 @@ namespace ServiceHub.Room.Context.Utilities
         /// <param name="libraryAddress">A library Address model.</param>
         /// <returns>A converted Address context model. Null if the model is invalid and cannot be mapped.</returns>
         private static Address LibraryToContext(Library.Models.Address libraryAddress) {
-            if (libraryAddress == null || !libraryAddress.isValidState()) {
+            if (libraryAddress == null || !libraryAddress.IsValidState()) {
                 return null;
             }
 
@@ -119,7 +119,7 @@ namespace ServiceHub.Room.Context.Utilities
                 Country = contextAddress.Country
             };
 
-            if (!libAddress.isValidState()) {
+            if (!libAddress.IsValidState()) {
                 return null;
             }
 

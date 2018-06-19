@@ -101,7 +101,7 @@ namespace ServiceHub.Room.Service.Controllers
                 value.RoomId = Guid.NewGuid();
             }
 
-            if (!value.isValidState())
+            if (!value.IsValidState())
             {
                 return BadRequest("Complete model required for insertions.");
             }
@@ -188,7 +188,7 @@ namespace ServiceHub.Room.Service.Controllers
                 return BadRequest("Trying to modify a read-only value.");
             }
 
-            if (item.isValidState())
+            if (item.IsValidState())
             {
                 var newCtxItem = ModelMapper.LibraryToContext(item);
 

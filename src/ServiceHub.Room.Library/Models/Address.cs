@@ -75,7 +75,7 @@ namespace ServiceHub.Room.Library.Models
         /// Checks if state of model is valid
         /// </summary>
         /// <returns>True if the model is valid, false otherwise.</returns>
-        public bool isValidState()
+        public bool IsValidState()
         {
             if (AddressId == Guid.Empty) { return false; }
             if (string.IsNullOrEmpty(Address1) || Address1?.Length > 255) { return false; }
